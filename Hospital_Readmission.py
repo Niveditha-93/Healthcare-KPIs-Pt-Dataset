@@ -9,14 +9,14 @@ from sklearn.ensemble import RandomForestClassifier
 "Load the Dataset"
 ds = pd.read_csv("hospital data analysis.csv")
 " EDA- Exploratory Data Analysis"
-#Pat_sat_head = (ds.head())
-#print(Pat_sat_head)
-#Pat_sat_info = (ds.info())
-#print(Pat_sat_info)
-#Pat_sat_describe = (ds.describe())
-#print(Pat_sat_describe)
-#Pat_sat_mis_val = (ds.isnull().sum())
-#print(Pat_sat_mis_val)
+Pat_sat_head = (ds.head())
+print(Pat_sat_head)
+Pat_sat_info = (ds.info())
+print(Pat_sat_info)
+Pat_sat_describe = (ds.describe())
+print(Pat_sat_describe)
+Pat_sat_mis_val = (ds.isnull().sum())
+print(Pat_sat_mis_val)
 ds_encoded_Prod = LabelEncoder().fit_transform(ds['Procedure'])
 print(ds_encoded_Prod)
 ds_encoded_Gendr = LabelEncoder().fit_transform(ds['Gender'])
@@ -30,13 +30,13 @@ print(ds_encoded_Out)
 
 "Checking for Outliers"
 ds_Length_of_Stay= ds['Length_of_Stay'].quantile(0.25)
-#print(ds_Length_of_Stay)
+print(ds_Length_of_Stay)
 ds_Satisfaction = ds['Satisfaction'].quantile(0.50)
-#print(ds_Satisfaction)
+print(ds_Satisfaction)
 'IQR(Inter-Quantile Range) = Middle Range'
 IQR = ds_Satisfaction-ds_Length_of_Stay
 lower_bound = ds_Length_of_Stay-1.5*IQR
-#print(lower_bound)
+print(lower_bound)
 upper_bound =readmission_counts = ds['Readmission'].value_counts()
 
 plt.figure()
@@ -45,7 +45,7 @@ plt.xlabel("Readmission")
 plt.ylabel("Count")
 plt.title("Readmission Distribution")
 plt.show()
-#print(upper_bound)
+print(upper_bound)
 
 'Outlier-visualize'
 plt.boxplot(ds['Length_of_Stay'],vert=False)
@@ -56,7 +56,7 @@ plt.show()
 plt.boxplot(ds['Satisfaction'],vert=False)
 plt.title("Satisfaction")
 plt.tight_layout()
-#plt.show()
+plt.show()
 
 "Visualization"
 "Average Cost by Readmission"
@@ -66,7 +66,7 @@ plt.bar(avg_cost.index, avg_cost.values)
 plt.xlabel("Readmission")
 plt.ylabel("Average Cost")
 plt.title("Average Treatment Cost by Readmission")
-#plt.show()
+plt.show()
 
 "Length of Stay vs Readmission"
 avg_los = ds.groupby("Readmission")["Length_of_Stay"].mean()
@@ -75,7 +75,7 @@ plt.bar(avg_los.index, avg_los.values)
 plt.xlabel("Readmission")
 plt.ylabel("Average Length of Stay")
 plt.title("Length of Stay vs Readmission")
-#plt.show()
+plt.show()
 
 "Condition-wise Readmission Rate"
 dept_readmission = pd.crosstab(ds['Condition'], ds['Readmission'])
@@ -83,7 +83,7 @@ dept_readmission.plot(kind='bar')
 plt.title("Condition-wise Readmission")
 plt.xlabel("Condition")
 plt.ylabel("Count")
-#plt.show()
+plt.show()
 
 "Age Distribution"
 plt.figure()
@@ -91,7 +91,7 @@ plt.hist(ds['Age'], bins=10)
 plt.xlabel("Age")
 plt.ylabel("Frequency")
 plt.title("Age Distribution of Patients")
-#plt.show()
+plt.show()
 
 "Preprocessing"
 ds['Readmission'] = LabelEncoder().fit_transform(ds['Readmission'])
